@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Asterisk,
-  Dribbble,
   Github,
   Instagram,
   Linkedin,
@@ -28,8 +27,6 @@ type Project = {
   imageAlt: string;
   tags: string[];
   theme: string;
-  github: string;
-  demo: string;
 };
 
 const navItems = [
@@ -41,97 +38,76 @@ const navItems = [
 
 const projects: Project[] = [
   {
-    title: "Morrow Studio",
-    category: "Brand identity · Digital",
+    title: "Olive & Oak",
+    category: "Logo design · Brand identity",
     description:
-      "A warm, considered identity and digital home for a fictional independent ceramics studio.",
+      "A sample identity concept for a modern artisan food brand, exploring a distinctive logo and a warm, natural visual language.",
     image:
-      "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=1200&q=85",
-    imageAlt: "Sculptural ceramic objects displayed in a sunlit studio",
-    tags: ["Art direction", "Branding", "Web design"],
+      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Minimal skincare packaging arranged as a branding mockup",
+    tags: ["Logo design", "Brand identity", "Art direction"],
     theme: "project-art",
-    github: "https://github.com/yourname/morrow-studio",
-    demo: "https://yourname.github.io/morrow-studio",
   },
   {
-    title: "Fieldnotes",
-    category: "Product design · Web app",
+    title: "Serein Botanicals",
+    category: "Packaging · Visual identity",
     description:
-      "A concept for a calmer way to collect inspiration, save ideas, and find creative connections.",
+      "A sample packaging concept for a fictional botanical skincare line, with a calm palette and clear product labels.",
     image:
-      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=85",
-    imageAlt: "An open notebook and pen on a clean desk",
-    tags: ["Product strategy", "UI/UX", "Prototyping"],
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Skincare bottles and containers arranged together",
+    tags: ["Packaging", "Label design", "Typography"],
     theme: "project-notes",
-    github: "https://github.com/yourname/fieldnotes",
-    demo: "https://yourname.github.io/fieldnotes",
   },
   {
-    title: "Goodkind Coffee",
-    category: "Visual identity · E-commerce",
+    title: "Daybreak Coffee",
+    category: "Brand identity · Packaging",
     description:
-      "A friendly visual world and storefront concept for a small-batch neighborhood coffee roaster.",
+      "A sample logo and coffee packaging direction for a fictional neighborhood coffee roaster.",
     image:
-      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=85",
-    imageAlt: "A welcoming neighborhood coffee shop interior",
-    tags: ["Brand identity", "Shopify", "Art direction"],
+      "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Coffee beans and a cup arranged for a coffee brand concept",
+    tags: ["Logo design", "Packaging", "Print design"],
     theme: "project-coffee",
-    github: "https://github.com/yourname/goodkind-coffee",
-    demo: "https://yourname.github.io/goodkind-coffee",
   },
 ];
 
 const skills = [
   {
     icon: Palette,
-    title: "Visual design",
-    items: "Brand identity, art direction, typography, illustration",
+    title: "Logo & branding",
+    items: "Logo design, visual identity, brand colors, typography",
   },
   {
     icon: PenTool,
-    title: "Product & UX",
-    items: "UI/UX design, wireframing, prototyping, design systems",
+    title: "Packaging & print",
+    items: "Packaging concepts, labels, print layouts, production-ready artwork",
   },
   {
     icon: Asterisk,
-    title: "Development",
-    items: "HTML, CSS, JavaScript, React, responsive design",
+    title: "Digital design",
+    items: "Social media graphics, campaign artwork, digital brand assets",
   },
 ];
 
 const timeline = [
   {
     type: "Experience",
-    date: "2022 — Present",
-    title: "Independent Designer & Studio Founder",
-    place: "Northstar Studio · Remote",
+    date: "Around 4 years",
+    title: "Graphic design",
+    place: "Freelance & independent work",
     description:
-      "Partnering with thoughtful teams to shape digital products, visual identities, and the experiences in between.",
-  },
-  {
-    type: "Experience",
-    date: "2020 — 2022",
-    title: "Product Designer",
-    place: "Creative practice · Your city",
-    description:
-      "Worked across research, interaction design, and visual systems for early-stage product teams.",
-  },
-  {
-    type: "Education",
-    date: "2016 — 2020",
-    title: "Design & Digital Media",
-    place: "Your university · Your city",
-    description:
-      "A foundation in visual communication, human-centered design, and creative technology.",
+      "Around four years of graphic design experience. Add specific roles, clients, education, and dates here when you are ready.",
   },
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com", icon: Instagram },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: Linkedin },
-  { label: "Dribbble", href: "https://dribbble.com", icon: Dribbble },
-  { label: "GitHub", href: "https://github.com", icon: Github },
+  { label: "Instagram", href: "https://www.instagram.com/afkar_akr", icon: Instagram },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/afkar-mohamed-29a7ba2a3", icon: Linkedin },
+  { label: "GitHub", href: "https://github.com/search?q=Afkar+Akr&type=users", icon: Github },
 ];
+
+const contactEmail = "your-email@example.com";
 
 function useTheme() {
   const [theme, setTheme] = useState<"light" | "dark">(() => {
@@ -212,7 +188,7 @@ function App() {
 
     const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
     const body = encodeURIComponent(`From: ${name} (${email})\n\n${message}`);
-    window.location.href = `mailto:hello@northstar.studio?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
     setFormStatus("Your email app should open with your message ready to send.");
     event.currentTarget.reset();
   }
@@ -225,9 +201,9 @@ function App() {
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Alex Morgan, home" onClick={closeMenu}>
-          <span className="wordmark-mark">a<span>.</span></span>
-          <span className="wordmark-name">Alex Morgan</span>
+        <a className="wordmark" href="#top" aria-label="Afkar Akr, home" onClick={closeMenu}>
+          <span className="wordmark-mark" aria-hidden="true">AK</span>
+          <span className="wordmark-name">Afkar Akr</span>
         </a>
         <button
           className="icon-button menu-toggle"
@@ -266,6 +242,8 @@ function App() {
 
       <main id="main">
         <section className="hero section-shell" id="top" aria-labelledby="hero-title">
+          <div className="hero-ambient-glow glow-top-left" aria-hidden="true" />
+          <div className="hero-ambient-glow glow-bottom-right" aria-hidden="true" />
           <div className="hero-copy">
             <motion.div
               className="availability"
@@ -283,9 +261,9 @@ function App() {
               variants={reveal}
               transition={{ delay: 0.08 }}
             >
-              Thoughtful design.
+              Graphic design.
               <br />
-              <span>Made to matter.</span>
+              <span>Made with meaning.</span>
             </motion.h1>
             <motion.p
               className="hero-intro"
@@ -294,8 +272,8 @@ function App() {
               variants={reveal}
               transition={{ delay: 0.16 }}
             >
-              I&apos;m Alex — an independent designer and studio founder creating meaningful
-              identities and digital experiences for people with a point of view.
+              I&apos;m Afkar — a graphic designer with around four years of experience creating
+              memorable logos, brand identities, and packaging.
             </motion.p>
             <motion.div
               className="hero-actions"
@@ -330,18 +308,18 @@ function App() {
           >
             <div className="portrait-frame">
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85"
-                alt="Portrait placeholder for Alex Morgan"
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1000&q=85"
+                alt="Male portrait placeholder for Afkar Akr"
                 loading="eager"
               />
               <div className="portrait-caption">
-                <span>Alex Morgan</span>
-                <span>Designer · Founder</span>
+                <span>Afkar Akr</span>
+                <span>Graphic Designer</span>
               </div>
             </div>
             <div className="hero-note">
               <span className="note-star">✳</span>
-              <span>Curious by nature.<br />Intentional by design.</span>
+              <span>Distinctive identities.<br />Thoughtful details.</span>
             </div>
             <span className="hero-orbit orbit-one" aria-hidden="true" />
             <span className="hero-orbit orbit-two" aria-hidden="true" />
@@ -373,21 +351,20 @@ function App() {
             variants={reveal}
           >
             <h2>
-              Good design makes room for <span>better things.</span>
+              I turn ideas into <span>visual identities.</span>
             </h2>
             <p>
-              I&apos;m a designer who likes asking one more question, noticing the little things,
-              and turning complicated ideas into something clear and human. My practice moves
-              between visual identity, digital product, and the details that make an experience
-              feel like itself.
+              I&apos;m Afkar Akr, a graphic designer with around four years of experience. I enjoy
+              shaping ideas into clear, memorable visuals—from distinctive logos and cohesive
+              brand identities to considered packaging.
             </p>
             <p>
-              When I&apos;m not at my desk, you&apos;ll probably find me collecting old magazines,
-              getting lost on a long walk, or trying a new recipe. I&apos;m building a small,
-              independent studio around kind collaboration and work with a longer shelf life.
+              My goal is to help businesses express who they are through thoughtful, consistent
+              design. I&apos;m always looking to learn, collaborate, and take on creative projects
+              where good design can make a difference.
             </p>
             <a className="text-link" href="#contact">
-              More about working together <ArrowUpRight size={15} aria-hidden="true" />
+              Let&apos;s work together <ArrowUpRight size={15} aria-hidden="true" />
             </a>
           </motion.div>
         </section>
@@ -395,9 +372,9 @@ function App() {
         <section className="skills-section section-spacing" aria-labelledby="skills-title">
           <div className="section-shell">
             <SectionHeading
-              eyebrow="What I bring"
-              title="A curious mind, a versatile toolkit."
-              description="From first thought to final details, I bring the right mix of big-picture thinking and hands-on craft."
+              eyebrow="Graphic design skills"
+              title="Building brands from the details up."
+              description="A design-focused toolkit for shaping memorable identities and bringing them to life across print and digital."
               titleId="skills-title"
             />
             <div className="skills-grid">
@@ -425,9 +402,9 @@ function App() {
           <div className="section-shell">
             <div className="work-heading">
               <SectionHeading
-                eyebrow="Selected explorations"
-                title="A few things I’ve made."
-                description="A collection of self-initiated concepts and illustrative placeholders. Project details are here to make this template easy to personalize."
+                eyebrow="Sample graphic design work"
+                title="Ideas made into identities."
+                description="These fictional concept projects are examples to help you present your logo, branding, and packaging work. Replace them with your own projects."
               />
               <span className="work-count">01 — 03</span>
             </div>
@@ -449,7 +426,7 @@ function App() {
                   >
                     <img src={project.image} alt={project.imageAlt} loading="lazy" />
                     <span className="project-image-action"><ArrowUpRight size={19} /></span>
-                    <span className="project-image-label">Concept project</span>
+                    <span className="project-image-label">Fictional sample concept</span>
                   </a>
                   <div className="project-meta">
                     <div>
@@ -463,14 +440,9 @@ function App() {
                     <div className="tag-list">
                       {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
                     </div>
-                    <div className="project-actions">
-                      <a href={project.github} target="_blank" rel="noreferrer" aria-label={`${project.title} GitHub placeholder (opens in a new tab)`}>
-                        GitHub <ArrowUpRight size={13} aria-hidden="true" />
-                      </a>
-                      <a href={project.demo} target="_blank" rel="noreferrer" aria-label={`${project.title} live demo placeholder (opens in a new tab)`}>
-                        Live <ArrowUpRight size={13} aria-hidden="true" />
-                      </a>
-                    </div>
+                    <a className="text-link project-contact-link" href="#contact">
+                      Discuss a project <ArrowUpRight size={13} aria-hidden="true" />
+                    </a>
                   </div>
                 </motion.article>
               ))}
@@ -486,8 +458,8 @@ function App() {
             <div className="services-intro">
               <SectionHeading
                 eyebrow="Ways to work together"
-                title="Good ideas deserve great execution."
-                description="Bring me in for a focused piece of work or a thoughtful start-to-finish partnership."
+                title="Design that helps your brand stand out."
+                description="From a memorable logo to packaging that feels unmistakably yours, let’s make your next idea real."
               />
               <a className="text-link" href="#contact">
                 Tell me what you&apos;re working on <ArrowUpRight size={15} />
@@ -497,18 +469,18 @@ function App() {
               {[
                 {
                   number: "01",
-                  title: "Brand & visual identity",
-                  detail: "Positioning, visual direction, identity systems, and brand guidelines.",
+                  title: "Logo design & branding",
+                  detail: "Custom logo concepts, visual identity systems, color palettes, and brand guidelines.",
                 },
                 {
                   number: "02",
-                  title: "Web & software development",
-                  detail: "Responsive websites, front-end builds, and lightweight software prototypes.",
+                  title: "Packaging & label design",
+                  detail: "Packaging concepts, product labels, and print-ready artwork for your products.",
                 },
                 {
                   number: "03",
-                  title: "Product & UI/UX design",
-                  detail: "Research, product flows, interface design, and interactive prototypes.",
+                  title: "Social media & marketing design",
+                  detail: "On-brand social graphics, campaign visuals, and promotional design assets.",
                 },
               ].map((service) => (
                 <details className="service-item" key={service.number}>
@@ -528,8 +500,8 @@ function App() {
           <div className="section-shell">
             <SectionHeading
               eyebrow="The journey so far"
-              title="Learning, making, growing."
-              description="A simple timeline template — replace these examples with your real experience and education."
+              title="Around four years in graphic design."
+              description="An overview of the experience shared so far. Add your specific roles, clients, and education details when you are ready."
             />
             <div className="timeline">
               {timeline.map((item, index) => (
@@ -559,11 +531,11 @@ function App() {
         <section className="contact-section section-spacing" id="contact">
           <div className="section-shell contact-layout">
             <div className="contact-intro">
-              <span className="eyebrow">Have a good one in mind?</span>
-              <h2>Let&apos;s make<br /><span>something meaningful.</span></h2>
-              <p>Tell me a little about what you&apos;re building. I&apos;ll get back to you as soon as I can.</p>
-              <a className="contact-email" href="mailto:hello@northstar.studio">
-                <Mail size={17} /> hello@northstar.studio
+              <span className="eyebrow">Have a design project in mind?</span>
+              <h2>Let&apos;s create<br /><span>something memorable.</span></h2>
+              <p>Tell me about your logo, branding, or packaging project, and let&apos;s start a conversation.</p>
+              <a className="contact-email" href={`mailto:${contactEmail}`}>
+                <Mail size={17} /> {contactEmail}
               </a>
               <SocialLinks />
             </div>
@@ -601,15 +573,15 @@ function App() {
 
       <footer className="site-footer">
         <div className="section-shell footer-inner">
-          <a className="wordmark footer-wordmark" href="#top">
-            <span className="wordmark-mark">a<span>.</span></span>
-            <span className="wordmark-name">Alex Morgan</span>
+          <a className="wordmark footer-wordmark" href="#top" aria-label="Afkar Akr, back to top">
+            <span className="wordmark-mark" aria-hidden="true">AK</span>
+            <span className="wordmark-name">Afkar Akr</span>
           </a>
-          <span className="footer-credit">Independent designer & studio founder</span>
+          <span className="footer-credit">Graphic designer · Around 4 years of experience</span>
           <nav className="footer-nav" aria-label="Footer navigation">
             {navItems.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
           </nav>
-          <span className="copyright">© {new Date().getFullYear()} Alex Morgan</span>
+          <span className="copyright">© {new Date().getFullYear()} Afkar Akr</span>
           <a className="back-to-top" href="#top" aria-label="Back to top">
             Back to top <ArrowUpRight size={14} />
           </a>
