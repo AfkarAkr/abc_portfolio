@@ -41,33 +41,66 @@ const projects: Project[] = [
     title: "Olive & Oak",
     category: "Logo design · Brand identity",
     description:
-      "A sample identity concept for a modern artisan food brand, exploring a distinctive logo and a warm, natural visual language.",
+      "A complete visual identity system featuring custom vector logo creation, color harmony, and brand guidelines for a modern artisan label.",
     image:
-      "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1200&q=85",
-    imageAlt: "Minimal skincare packaging arranged as a branding mockup",
+      "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Graphic designer creating vector logo marks and visual brand assets on a digital canvas",
     tags: ["Logo design", "Brand identity", "Art direction"],
     theme: "project-art",
   },
   {
-    title: "Serein Botanicals",
-    category: "Packaging · Visual identity",
+    title: "Serein Studio",
+    category: "Brand identity · Stationery",
     description:
-      "A sample packaging concept for a fictional botanical skincare line, with a calm palette and clear product labels.",
+      "A refined stationery and print identity suite featuring minimalist typography, business cards, letterheads, and brand guidelines.",
     image:
-      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1200&q=85",
-    imageAlt: "Skincare bottles and containers arranged together",
-    tags: ["Packaging", "Label design", "Typography"],
+      "https://images.unsplash.com/photo-1633533452148-a9657d2c9a5f?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Brand identity stationery layout with business cards, labels, and minimalist typographic design",
+    tags: ["Brand identity", "Stationery", "Typography"],
     theme: "project-notes",
   },
   {
     title: "Daybreak Coffee",
     category: "Brand identity · Packaging",
     description:
-      "A sample logo and coffee packaging direction for a fictional neighborhood coffee roaster.",
+      "A sample logo and coffee packaging direction for a neighborhood coffee roaster with custom roast bags, typography, and stamp labels.",
     image:
-      "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=1200&q=85",
-    imageAlt: "Coffee beans and a cup arranged for a coffee brand concept",
+      "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Specialty coffee packaging design mockup with custom roast labels and typography",
     tags: ["Logo design", "Packaging", "Print design"],
+    theme: "project-coffee",
+  },
+  {
+    title: "Kroma Editorial",
+    category: "Editorial design · Publication",
+    description:
+      "A modern publication and editorial layout concept exploring typographic rhythm, grid structure, and minimalist print aesthetics.",
+    image:
+      "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Editorial layout, typography grid system, and publication design mockup",
+    tags: ["Editorial design", "Typography", "Grid layout"],
+    theme: "project-art",
+  },
+  {
+    title: "Aura Soundworks",
+    category: "Visual identity · Digital art",
+    description:
+      "A vibrant visual identity and campaign artwork concept for an independent electronic music label, exploring dynamic generative gradients.",
+    image:
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Dynamic abstract fluid gradients and digital art identity design",
+    tags: ["Art direction", "Digital design", "Visual identity"],
+    theme: "project-notes",
+  },
+  {
+    title: "Botanica Reserve",
+    category: "Packaging · Label design",
+    description:
+      "A luxury packaging concept for cold-pressed botanical infusions, featuring bespoke embossed labels, minimalist seals, and custom boxes.",
+    image:
+      "https://images.unsplash.com/photo-1633533447057-56ccf997f4fe?auto=format&fit=crop&w=1200&q=85",
+    imageAlt: "Cold-pressed botanical infusions bottle packaging with bespoke labels",
+    tags: ["Packaging", "Label design", "Print finish"],
     theme: "project-coffee",
   },
 ];
@@ -135,29 +168,40 @@ function SectionHeading({
   description?: string;
   titleId?: string;
 }) {
+  const reduceMotion = useReducedMotion();
   return (
-    <div className="section-heading">
+    <motion.div
+      className="section-heading"
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+    >
       <span className="eyebrow">{eyebrow}</span>
       <h2 id={titleId}>{title}</h2>
       {description && <p>{description}</p>}
-    </div>
+    </motion.div>
   );
 }
 
 function SocialLinks({ compact = false }: { compact?: boolean }) {
+  const reduceMotion = useReducedMotion();
   return (
     <div className={`social-links${compact ? " social-links-compact" : ""}`}>
       {socialLinks.map(({ label, href, icon: Icon }) => (
-        <a
+        <motion.a
           key={label}
           href={href}
           target="_blank"
           rel="noreferrer"
           aria-label={`${label} (opens in a new tab)`}
+          whileHover={reduceMotion ? {} : { scale: compact ? 1.12 : 1.05, y: -2 }}
+          whileTap={reduceMotion ? {} : { scale: 0.94 }}
+          transition={{ duration: 0.2 }}
         >
           <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
           {!compact && <span>{label}</span>}
-        </a>
+        </motion.a>
       ))}
     </div>
   );
@@ -169,9 +213,18 @@ function App() {
   const [formStatus, setFormStatus] = useState("");
   const reduceMotion = useReducedMotion();
 
+  const luxuryEase = [0.22, 1, 0.36, 1];
+
   const reveal = {
-    hidden: { opacity: 0, y: reduceMotion ? 0 : 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.65 } },
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 28 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: reduceMotion ? 0 : 0.75,
+        ease: luxuryEase,
+      },
+    },
   };
 
   function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
@@ -201,20 +254,35 @@ function App() {
     <>
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Afkar Akr, home" onClick={closeMenu}>
-          <span className="wordmark-mark" aria-hidden="true">AK</span>
+        <motion.a
+          className="wordmark"
+          href="#top"
+          aria-label="Afkar Akr, home"
+          onClick={closeMenu}
+          whileHover={reduceMotion ? {} : { scale: 1.02 }}
+          whileTap={reduceMotion ? {} : { scale: 0.98 }}
+        >
+          <motion.span
+            className="wordmark-mark"
+            aria-hidden="true"
+            whileHover={reduceMotion ? {} : { rotate: -12, scale: 1.08 }}
+            transition={{ duration: 0.25 }}
+          >
+            AK
+          </motion.span>
           <span className="wordmark-name">Afkar Akr</span>
-        </a>
-        <button
+        </motion.a>
+        <motion.button
           className="icon-button menu-toggle"
           type="button"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={menuOpen}
           aria-controls="primary-navigation"
           onClick={() => setMenuOpen((open) => !open)}
+          whileTap={reduceMotion ? {} : { scale: 0.92 }}
         >
           {menuOpen ? <X size={21} /> : <Menu size={21} />}
-        </button>
+        </motion.button>
         <nav
           className={`primary-navigation${menuOpen ? " is-open" : ""}`}
           id="primary-navigation"
@@ -225,18 +293,26 @@ function App() {
               {item.label}
             </a>
           ))}
-          <a className="nav-cta" href="#contact" onClick={closeMenu}>
+          <motion.a
+            className="nav-cta"
+            href="#contact"
+            onClick={closeMenu}
+            whileHover={reduceMotion ? {} : { scale: 1.04, y: -1 }}
+            whileTap={reduceMotion ? {} : { scale: 0.97 }}
+          >
             Let&apos;s talk <ArrowUpRight size={15} aria-hidden="true" />
-          </a>
-          <button
+          </motion.a>
+          <motion.button
             className="icon-button theme-toggle"
             type="button"
             onClick={toggleTheme}
             aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
             title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            whileHover={reduceMotion ? {} : { rotate: 20, scale: 1.08 }}
+            whileTap={reduceMotion ? {} : { scale: 0.92 }}
           >
             {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
+          </motion.button>
         </nav>
       </header>
 
@@ -259,7 +335,7 @@ function App() {
               initial="hidden"
               animate="visible"
               variants={reveal}
-              transition={{ delay: 0.08 }}
+              transition={{ delay: 0.08, ease: luxuryEase, duration: 0.75 }}
             >
               Graphic design.
               <br />
@@ -270,7 +346,7 @@ function App() {
               initial="hidden"
               animate="visible"
               variants={reveal}
-              transition={{ delay: 0.16 }}
+              transition={{ delay: 0.16, ease: luxuryEase, duration: 0.75 }}
             >
               I&apos;m Afkar — a graphic designer with around four years of experience creating
               memorable logos, brand identities, and packaging.
@@ -280,21 +356,33 @@ function App() {
               initial="hidden"
               animate="visible"
               variants={reveal}
-              transition={{ delay: 0.24 }}
+              transition={{ delay: 0.24, ease: luxuryEase, duration: 0.75 }}
             >
-              <a className="button button-primary" href="#work">
+              <motion.a
+                className="button button-primary"
+                href="#work"
+                whileHover={reduceMotion ? {} : { y: -3, scale: 1.02 }}
+                whileTap={reduceMotion ? {} : { scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
                 Explore my work <ArrowDownRight size={17} aria-hidden="true" />
-              </a>
-              <a className="button button-text" href="#contact">
+              </motion.a>
+              <motion.a
+                className="button button-text"
+                href="#contact"
+                whileHover={reduceMotion ? {} : { x: 4 }}
+                whileTap={reduceMotion ? {} : { scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
                 Start a conversation <ArrowRight size={16} aria-hidden="true" />
-              </a>
+              </motion.a>
             </motion.div>
             <motion.div
               className="hero-socials"
               initial="hidden"
               animate="visible"
               variants={reveal}
-              transition={{ delay: 0.32 }}
+              transition={{ delay: 0.32, ease: luxuryEase, duration: 0.75 }}
             >
               <span>Find me elsewhere</span>
               <SocialLinks compact />
@@ -302,31 +390,44 @@ function App() {
           </div>
           <motion.div
             className="hero-visual"
-            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.97 }}
+            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: reduceMotion ? 0 : 0.8, delay: 0.18 }}
+            transition={{ duration: reduceMotion ? 0 : 0.85, delay: 0.18, ease: luxuryEase }}
           >
-            <div className="portrait-frame">
+            <motion.div
+              className="portrait-frame"
+              whileHover={reduceMotion ? {} : { scale: 1.02 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
               <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1000&q=85"
-                alt="Male portrait placeholder for Afkar Akr"
+                src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&w=1000&q=85"
+                alt="Graphic designer working on visual identity and color systems at a design desk"
                 loading="eager"
               />
               <div className="portrait-caption">
                 <span>Afkar Akr</span>
                 <span>Graphic Designer</span>
               </div>
-            </div>
-            <div className="hero-note">
+            </motion.div>
+            <motion.div
+              className="hero-note"
+              animate={reduceMotion ? {} : { y: [0, -8, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            >
               <span className="note-star">✳</span>
               <span>Distinctive identities.<br />Thoughtful details.</span>
-            </div>
+            </motion.div>
             <span className="hero-orbit orbit-one" aria-hidden="true" />
             <span className="hero-orbit orbit-two" aria-hidden="true" />
           </motion.div>
-          <a className="scroll-cue" href="#about">
+          <motion.a
+            className="scroll-cue"
+            href="#about"
+            animate={reduceMotion ? {} : { y: [0, 6, 0] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          >
             <ArrowDown size={15} aria-hidden="true" /> Scroll to explore
-          </a>
+          </motion.a>
         </section>
 
         <section className="about section-shell section-spacing" id="about">
@@ -338,10 +439,15 @@ function App() {
             variants={reveal}
           >
             <span className="eyebrow">A little about me</span>
-            <div className="about-stamp" aria-hidden="true">
+            <motion.div
+              className="about-stamp"
+              aria-hidden="true"
+              whileHover={reduceMotion ? {} : { scale: 1.05, rotate: 2 }}
+              transition={{ duration: 0.25 }}
+            >
               <span>DESIGN WITH INTENTION</span>
               <Asterisk size={25} />
-            </div>
+            </motion.div>
           </motion.div>
           <motion.div
             className="about-copy"
@@ -363,9 +469,14 @@ function App() {
               design. I&apos;m always looking to learn, collaborate, and take on creative projects
               where good design can make a difference.
             </p>
-            <a className="text-link" href="#contact">
+            <motion.a
+              className="text-link"
+              href="#contact"
+              whileHover={reduceMotion ? {} : { x: 4 }}
+              transition={{ duration: 0.2 }}
+            >
               Let&apos;s work together <ArrowUpRight size={15} aria-hidden="true" />
-            </a>
+            </motion.a>
           </motion.div>
         </section>
 
@@ -386,7 +497,8 @@ function App() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.25 }}
                   variants={reveal}
-                  transition={{ delay: index * 0.08 }}
+                  transition={{ delay: index * 0.1, ease: luxuryEase, duration: 0.7 }}
+                  whileHover={reduceMotion ? {} : { y: -6 }}
                 >
                   <div className="skill-icon"><Icon size={21} strokeWidth={1.7} /></div>
                   <span className="skill-index">0{index + 1}</span>
@@ -406,7 +518,7 @@ function App() {
                 title="Ideas made into identities."
                 description="These fictional concept projects are examples to help you present your logo, branding, and packaging work. Replace them with your own projects."
               />
-              <span className="work-count">01 — 03</span>
+              <span className="work-count">01 — 0{projects.length}</span>
             </div>
             <div className="projects-grid">
               {projects.map((project, index) => (
@@ -417,7 +529,8 @@ function App() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.15 }}
                   variants={reveal}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.12, ease: luxuryEase, duration: 0.7 }}
+                  whileHover={reduceMotion ? {} : { y: -6 }}
                 >
                   <a
                     className={`project-image ${project.theme}`}
@@ -447,9 +560,15 @@ function App() {
                 </motion.article>
               ))}
             </div>
-            <a className="button button-outline all-work-link" href="#contact">
+            <motion.a
+              className="button button-outline all-work-link"
+              href="#contact"
+              whileHover={reduceMotion ? {} : { y: -3, scale: 1.02 }}
+              whileTap={reduceMotion ? {} : { scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
               Have a project in mind? <ArrowRight size={16} aria-hidden="true" />
-            </a>
+            </motion.a>
           </div>
         </section>
 
@@ -461,9 +580,14 @@ function App() {
                 title="Design that helps your brand stand out."
                 description="From a memorable logo to packaging that feels unmistakably yours, let’s make your next idea real."
               />
-              <a className="text-link" href="#contact">
+              <motion.a
+                className="text-link"
+                href="#contact"
+                whileHover={reduceMotion ? {} : { x: 4 }}
+                transition={{ duration: 0.2 }}
+              >
                 Tell me what you&apos;re working on <ArrowUpRight size={15} />
-              </a>
+              </motion.a>
             </div>
             <div className="service-list">
               {[
@@ -482,15 +606,23 @@ function App() {
                   title: "Social media & marketing design",
                   detail: "On-brand social graphics, campaign visuals, and promotional design assets.",
                 },
-              ].map((service) => (
-                <details className="service-item" key={service.number}>
+              ].map((service, index) => (
+                <motion.details
+                  className="service-item"
+                  key={service.number}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.25 }}
+                  variants={reveal}
+                  transition={{ delay: index * 0.08, ease: luxuryEase, duration: 0.6 }}
+                >
                   <summary>
                     <span className="service-number">{service.number}</span>
                     <span className="service-title">{service.title}</span>
                     <span className="service-expand" aria-hidden="true">+</span>
                   </summary>
                   <p>{service.detail}</p>
-                </details>
+                </motion.details>
               ))}
             </div>
           </div>
@@ -512,7 +644,7 @@ function App() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.2 }}
                   variants={reveal}
-                  transition={{ delay: index * 0.08 }}
+                  transition={{ delay: index * 0.08, ease: luxuryEase, duration: 0.7 }}
                 >
                   <div className="timeline-marker"><span /></div>
                   <div className="timeline-date">{item.date}</div>
@@ -530,16 +662,36 @@ function App() {
 
         <section className="contact-section section-spacing" id="contact">
           <div className="section-shell contact-layout">
-            <div className="contact-intro">
+            <motion.div
+              className="contact-intro"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              variants={reveal}
+            >
               <span className="eyebrow">Have a design project in mind?</span>
               <h2>Let&apos;s create<br /><span>something memorable.</span></h2>
               <p>Tell me about your logo, branding, or packaging project, and let&apos;s start a conversation.</p>
-              <a className="contact-email" href={`mailto:${contactEmail}`}>
+              <motion.a
+                className="contact-email"
+                href={`mailto:${contactEmail}`}
+                whileHover={reduceMotion ? {} : { scale: 1.03, y: -2 }}
+                whileTap={reduceMotion ? {} : { scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Mail size={17} /> {contactEmail}
-              </a>
+              </motion.a>
               <SocialLinks />
-            </div>
-            <form className="contact-form" onSubmit={handleContactSubmit}>
+            </motion.div>
+            <motion.form
+              className="contact-form"
+              onSubmit={handleContactSubmit}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              variants={reveal}
+              transition={{ delay: 0.1, ease: luxuryEase, duration: 0.7 }}
+            >
               <div className="form-row">
                 <label>
                   Your name
@@ -560,31 +712,54 @@ function App() {
                 />
               </label>
               <div className="form-submit-row">
-                <button className="button button-primary" type="submit">
+                <motion.button
+                  className="button button-primary"
+                  type="submit"
+                  whileHover={reduceMotion ? {} : { scale: 1.03, y: -2 }}
+                  whileTap={reduceMotion ? {} : { scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                >
                   Send an inquiry <Send size={15} aria-hidden="true" />
-                </button>
+                </motion.button>
                 <span className="form-note">Opens a pre-filled email in your email app.</span>
               </div>
               <p className="form-status" aria-live="polite">{formStatus}</p>
-            </form>
+            </motion.form>
           </div>
         </section>
       </main>
 
       <footer className="site-footer">
         <div className="section-shell footer-inner">
-          <a className="wordmark footer-wordmark" href="#top" aria-label="Afkar Akr, back to top">
+          <motion.a
+            className="wordmark footer-wordmark"
+            href="#top"
+            aria-label="Afkar Akr, back to top"
+            whileHover={reduceMotion ? {} : { scale: 1.02 }}
+            whileTap={reduceMotion ? {} : { scale: 0.98 }}
+          >
             <span className="wordmark-mark" aria-hidden="true">AK</span>
             <span className="wordmark-name">Afkar Akr</span>
-          </a>
+          </motion.a>
           <span className="footer-credit">Graphic designer · Around 4 years of experience</span>
           <nav className="footer-nav" aria-label="Footer navigation">
-            {navItems.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href}>
+                {item.label}
+              </a>
+            ))}
           </nav>
           <span className="copyright">© {new Date().getFullYear()} Afkar Akr</span>
-          <a className="back-to-top" href="#top" aria-label="Back to top">
+          <motion.a
+            className="back-to-top"
+            href="#top"
+            aria-label="Back to top"
+            whileHover={reduceMotion ? {} : { y: -3 }}
+            whileTap={reduceMotion ? {} : { scale: 0.96 }}
+            transition={{ duration: 0.2 }}
+          >
             Back to top <ArrowUpRight size={14} />
-          </a>
+          </motion.a>
         </div>
       </footer>
     </>
